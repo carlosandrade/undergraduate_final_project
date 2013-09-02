@@ -1,0 +1,273 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>classification_analysis</title><meta name="generator" content="MATLAB 8.0"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2013-07-14"><meta name="DC.source" content="classification_analysis.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">LOAD DATA</a></li><li><a href="#2">PRE PROCESSING</a></li><li><a href="#3">ENSEMBLES</a></li><li><a href="#4">SVM Classification</a></li><li><a href="#5">Neural Network Classification Feed Foward Back Propagation</a></li></ul></div><h2>LOAD DATA<a name="1"></a></h2><p>Releases 1, 2, 3, 4 and 6 are loaded as cross validation sets. Release 5 was selected as a test set as defined in the R script.</p><pre class="codeinput">load(<span class="string">'derby_dataset.mat'</span>)
+</pre><h2>PRE PROCESSING<a name="2"></a></h2><p>Assign X and y variables for classification</p><pre class="codeinput">Xtrain = derby_cv3(:,[1,2,4:end]);
+Ytrain = derby_cv3(:,3);
+</pre><h2>ENSEMBLES<a name="3"></a></h2><p>Train a AdaBoostM2 and an Bag Ensemble for classification</p><pre class="codeinput">Xcv = derby_test(:,[1,2,4:end]);
+Ycv = derby_test(:,3);
+<span class="comment">%Fit an AdaBoostM2 with 50 trees as weak learners.</span>
+ens = fitensemble(Xtrain,Ytrain,<span class="string">'AdaBoostM2'</span>,50,<span class="string">'Tree'</span>);
+
+<span class="comment">%Plot error graph as the number of tree increases</span>
+figure;
+plot(loss(ens,Xcv,Ycv,<span class="string">'mode'</span>,<span class="string">'cumulative'</span>));
+xlabel(<span class="string">'Number of trees'</span>);
+ylabel(<span class="string">'Test classification error'</span>);
+
+<span class="comment">% Confusion Matrix for AdaBoostM2</span>
+[C, order] = confusionmat(Ycv,predict(ens,Xcv),<span class="string">'order'</span>, [1 2 3])
+
+<span class="comment">%Fit a bag ensemble with 200 trees as weak learners.</span>
+bag = fitensemble(Xtrain,Ytrain,<span class="string">'Bag'</span>,200,<span class="string">'Tree'</span>,<span class="keyword">...</span>
+    <span class="string">'type'</span>,<span class="string">'classification'</span>);
+
+<span class="comment">%Plot error graph as the number of tree increases</span>
+figure;
+plot(loss(bag,Xcv,Ycv,<span class="string">'mode'</span>,<span class="string">'cumulative'</span>));
+xlabel(<span class="string">'Number of trees'</span>);
+ylabel(<span class="string">'Test classification error'</span>);
+
+<span class="comment">% Confusion Matrix for Bag</span>
+[C, order] = confusionmat(Ycv,predict(bag,Xcv),<span class="string">'order'</span>, [1 2 3])
+</pre><pre class="codeoutput">
+C =
+
+    33     2    32
+     0     1    10
+     0     1     5
+
+
+order =
+
+     1
+     2
+     3
+
+
+C =
+
+    41     4    22
+     0     1    10
+     1     1     4
+
+
+order =
+
+     1
+     2
+     3
+
+</pre><img vspace="5" hspace="5" src="classification_analysis_01.png" alt=""> <img vspace="5" hspace="5" src="classification_analysis_02.png" alt=""> <h2>SVM Classification<a name="4"></a></h2><pre class="codeinput">predictionsXcv = multisvm(Xtrain,Ytrain,Xcv);
+[C, order] = confusionmat(Ycv,predictionsXcv,<span class="string">'order'</span>, [1 2 3])
+</pre><pre class="codeoutput">
+C =
+
+    58     9     0
+     3     5     3
+     1     2     3
+
+
+order =
+
+     1
+     2
+     3
+
+</pre><h2>Neural Network Classification Feed Foward Back Propagation<a name="5"></a></h2><p>Preprocess the class so that each row consists of the classes 1, 2, 3 in 0s and 1s in YtrainANN.</p><pre class="codeinput">num_labels = 3;
+YtrainANN = zeros(size(Ytrain,1),3);
+<span class="keyword">for</span> c = 1:num_labels
+    YtrainANN(:,c) = (Ytrain == c);
+<span class="keyword">end</span>
+YtrainANN = YtrainANN';
+<span class="comment">% For the input data XtrainANN each row shoud contain a given feature.</span>
+<span class="comment">% We apply feature scalling and mean normalization.</span>
+[XtrainANN,etc,etc] = featureNormalize(Xtrain);
+XtrainANN = XtrainANN';
+<span class="comment">% Create a feed foward ANN with 1 hidden layer containing 10 nodes.</span>
+net = patternnet(20);
+[net, tr] = train(net,XtrainANN,YtrainANN);
+<span class="comment">%plotperform(tr)</span>
+view(net)
+
+<span class="comment">% Predictions contains on each column the probability of a data point</span>
+<span class="comment">% to belong to a given class (row 1 is class 1, row 2 is class 2 and</span>
+<span class="comment">% row 3 is class 3.</span>
+XcvANN = featureNormalize(Xcv);
+XcvANN = XcvANN';
+predictionsANN = net(XcvANN);
+<span class="comment">% We assign the predicted class of a given data point to be the one with</span>
+<span class="comment">% maximum probability. This give us a column vector of the same type as</span>
+<span class="comment">% YtrainANN but containing the ANN predicted values. %predClass is the</span>
+<span class="comment">% assigned class for a given data point and probClass contains the</span>
+<span class="comment">% associated probability of being of that class.</span>
+[probClass,predClass] = max(predictionsANN', [], 2);
+<span class="comment">%perf = perform(net,YtrainANN,predictionsANN);</span>
+<span class="comment">%classes = vec2ind(YtrainANN);</span>
+
+<span class="comment">% Lastly we plot the confusion matrix.</span>
+[C, order] = confusionmat(Ycv,predClass,<span class="string">'order'</span>, [1 2 3])
+</pre><pre class="codeoutput">
+C =
+
+     0     1    66
+     0     0    11
+     0     0     6
+
+
+order =
+
+     1
+     2
+     3
+
+</pre><img vspace="5" hspace="5" src="classification_analysis_03.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2012b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% LOAD DATA
+% Releases 1, 2, 3, 4 and 6 are loaded as cross validation sets. Release 5
+% was selected as a test set as defined in the R script.
+load('derby_dataset.mat')
+%% PRE PROCESSING
+% Assign X and y variables for classification
+Xtrain = derby_cv3(:,[1,2,4:end]);
+Ytrain = derby_cv3(:,3);
+
+%% ENSEMBLES
+% Train a AdaBoostM2 and an Bag Ensemble for classification
+
+Xcv = derby_test(:,[1,2,4:end]);
+Ycv = derby_test(:,3);
+%Fit an AdaBoostM2 with 50 trees as weak learners. 
+ens = fitensemble(Xtrain,Ytrain,'AdaBoostM2',50,'Tree');
+
+%Plot error graph as the number of tree increases
+figure;
+plot(loss(ens,Xcv,Ycv,'mode','cumulative'));
+xlabel('Number of trees');
+ylabel('Test classification error');
+
+% Confusion Matrix for AdaBoostM2
+[C, order] = confusionmat(Ycv,predict(ens,Xcv),'order', [1 2 3])
+
+%Fit a bag ensemble with 200 trees as weak learners.
+bag = fitensemble(Xtrain,Ytrain,'Bag',200,'Tree',...
+    'type','classification');
+
+%Plot error graph as the number of tree increases
+figure;
+plot(loss(bag,Xcv,Ycv,'mode','cumulative'));
+xlabel('Number of trees');
+ylabel('Test classification error');
+
+% Confusion Matrix for Bag
+[C, order] = confusionmat(Ycv,predict(bag,Xcv),'order', [1 2 3])
+
+%% SVM Classification
+predictionsXcv = multisvm(Xtrain,Ytrain,Xcv);
+[C, order] = confusionmat(Ycv,predictionsXcv,'order', [1 2 3])
+
+%% Neural Network Classification Feed Foward Back Propagation
+% Preprocess the class so that each row consists of the classes 1, 2, 3
+% in 0s and 1s in YtrainANN.
+num_labels = 3;
+YtrainANN = zeros(size(Ytrain,1),3);
+for c = 1:num_labels
+    YtrainANN(:,c) = (Ytrain == c);
+end
+YtrainANN = YtrainANN';
+% For the input data XtrainANN each row shoud contain a given feature. 
+% We apply feature scalling and mean normalization.
+[XtrainANN,etc,etc] = featureNormalize(Xtrain); 
+XtrainANN = XtrainANN';
+% Create a feed foward ANN with 1 hidden layer containing 10 nodes.
+net = patternnet(20);
+[net, tr] = train(net,XtrainANN,YtrainANN);
+%plotperform(tr)
+view(net)
+
+% Predictions contains on each column the probability of a data point 
+% to belong to a given class (row 1 is class 1, row 2 is class 2 and 
+% row 3 is class 3.
+XcvANN = featureNormalize(Xcv);
+XcvANN = XcvANN';
+predictionsANN = net(XcvANN);
+% We assign the predicted class of a given data point to be the one with
+% maximum probability. This give us a column vector of the same type as 
+% YtrainANN but containing the ANN predicted values. %predClass is the 
+% assigned class for a given data point and probClass contains the 
+% associated probability of being of that class. 
+[probClass,predClass] = max(predictionsANN', [], 2);
+%perf = perform(net,YtrainANN,predictionsANN);
+%classes = vec2ind(YtrainANN);
+
+% Lastly we plot the confusion matrix.
+[C, order] = confusionmat(Ycv,predClass,'order', [1 2 3])
+
+
+
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>[#LUCENE-55] Delete failed after new Term is indexed</title>
+    <meta http-equiv="Content-Type" Content="application/vnd.ms-word; charset=utf-8">
+        <style type="text/css">
+
+.tableBorder, .grid
+{
+    background-color: #fff;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableBorder td, .grid td
+{
+    vertical-align: top;
+    padding: 2px;
+    border: 1px solid #ccc;
+}
+
+.noPadding
+{
+    padding: 0 !important;
+}
+
+h3 .subText
+{
+    font-size: 60%;
+    font-weight: normal;
+}
+
+.tabLabel
+{
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-bottom:none;
+    padding: 2px;
+    display: inline;
+}
+
+td.blank
+{
+    padding: 0;
+    margin: 0;
+}
+
+.blank td
+{
+    border: none;
+}
+
+#descriptionArea
+{
+    margin: 0;
+    padding: 2px;
+    border: 1px solid #ccc;
+}
+
+hr
+{
+    border-top:1px solid #aaa;
+}
+
+hr.fullcontent
+{
+  height: 15px;
+  padding: 10px 0;
+  background: #fff url('https://issues.apache.org/jira/images/icons/hr.gif') no-repeat scroll center;
+}
+
+</style>
+
+</head>
+<body>
+
+<table class="tableBorder" cellpadding="0" cellspacing="0" border="0" width="100%">
+    <tr>
+        <td bgcolor="#f0f0f0" width="100%" colspan="2" valign="top">
+                            <h3 class="formtitle">
+                        [LUCENE-55]&nbsp;<a href="https://issues.apache.org/jira/browse/LUCENE-55">Delete failed after new Term is indexed</a>
+            <span class="subText">
+               Created: 13/Sep/02                   &nbsp;Updated: 27/May/06
+
+                                                    &nbsp;Resolved: 27/May/06
+                            </span>
+            </h3>
+        </td>
+    </tr>
+    <tr>
+        <td width="20%"><b>Status:</b></td>
+        <td width="80%">Closed</td>
+    </tr>
+    <tr>
+        <td width="20%"><b>Project:</b></td>
+        <td width="80%"><a href="https://issues.apache.org/jira/secure/BrowseProject.jspa?id=12310110">Lucene - Core</a></td>
+    </tr>
+
+        <tr>
+            <td><b>Component/s:</b></td>
+            <td>
+                                        <a title="core/index - issues with indexing code"
+                href="https://issues.apache.org/jira/secure/IssueNavigator.jspa?reset=true&mode=hide&sorter/order=ASC&sorter/field=priority&pid=12310110&component=12310232"
+            >core/index</a>                        </td>
+    </tr>
+    
+
+        <tr>
+            <td><b>Affects Version/s:</b></td>
+            <td>
+                                        <a title="1.2 - First Apache release"
+                href="https://issues.apache.org/jira/secure/IssueNavigator.jspa?reset=true&mode=hide&sorter/order=ASC&sorter/field=priority&pid=12310110&version=12310284"
+            >1.2</a>                        </td>
+    </tr>
+    
+
+        <tr>
+            <td><b>Fix Version/s:</b></td>
+            <td>
+                            None
+                </td>
+    </tr>
+    
+    </table>
+
+<br />
+<table class="grid" cellpadding="0" cellspacing="0" border="0" width="100%">
+    <tr>
+        <td bgcolor="#f0f0f0" valign="top" width="20%">
+            <b>Type:</b>
+        </td>
+        <td bgcolor="#ffffff" valign="top"  width="30%" >
+            Bug
+        </td>
+
+                    <td bgcolor="#f0f0f0">
+                <b>Priority:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top" nowrap>
+                Major
+            </td>
+            </tr>
+    <tr>
+                        <td bgcolor="#f0f0f0" valign="top" width="20%">
+                <b>Reporter:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top"  width="30%" >
+                                            <a class="user-hover" rel="tlai@leversoft.com" id="word_reporter_tlai@leversoft.com" href="https://issues.apache.org/jira/secure/ViewProfile.jspa?name=tlai%40leversoft.com">Tony Lai</a>
+                            </td>
+        
+                    <td bgcolor="#f0f0f0" width="20%">
+                <b>Assignee:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top" nowrap  width="30%" >
+                                            <a class="user-hover" rel="java-dev@lucene.apache.org" id="word_assignee_java-dev@lucene.apache.org" href="https://issues.apache.org/jira/secure/ViewProfile.jspa?name=java-dev%40lucene.apache.org">Lucene Developers</a>
+                            </td>
+            </tr>
+    	<tr>
+		<td bgcolor="#f0f0f0" width="20%">
+			<b>Resolution:</b>
+		</td>
+		<td bgcolor="#ffffff" valign="top" width="30%" nowrap>
+                            Fixed
+                    </td>
+                    <td bgcolor="#f0f0f0" width="20%">
+                <b>Votes:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top" width="30%" nowrap>
+                0
+            </td>
+        
+    </tr>
+    
+        <tr>
+        <td bgcolor="#f0f0f0" width="20%">
+            <b>Labels:</b>
+        </td>
+        <td id="labels-12314205-value" class="value" bgcolor="#ffffff" valign="top" colspan="3" nowrap>
+                            None
+                    </td>
+    </tr>
+    
+    	<tr>
+        		<td bgcolor="#f0f0f0" width="20%"><b>Remaining Estimate:</b></td>
+        <td bgcolor="#ffffff" valign="top" nowrap width="80%" colspan="3">
+                            Not Specified
+            		</td>
+    </tr>
+    <tr>
+                <td bgcolor="#f0f0f0" width="20%"><b>Time Spent:</b></td>
+		<td bgcolor="#ffffff" valign="top" nowrap width="80%" colspan="3">
+                            Not Specified
+            		</td>
+	</tr>
+    <tr>
+                <td bgcolor="#f0f0f0" width="20%"><b>Original Estimate:</b></td>
+		<td bgcolor="#ffffff" valign="top" nowrap width="80%" colspan="3">
+                            Not Specified
+            		</td>
+    </tr>
+    
+    	<tr>
+
+		<td bgcolor="#f0f0f0" width="20%" valign="top">
+			<b>Environment:</b>
+		</td>
+		<td bgcolor="#ffffff" valign="top" colspan="3">
+            <p>Operating System: other<br/>
+Platform: Other</p>
+		</td>
+	</tr>
+    </table>
+
+
+
+    <br />
+
+    	<table class="grid" cellpadding="0" cellspacing="0" border="0" width="100%">
+            
+
+                <tr>
+            <td bgcolor="#f0f0f0" width=20% valign=top>
+                <b>Attachments:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top">
+                                                            <img src="https://issues.apache.org/jira/images/icons/attach/java.gif" height="16" width="16" alt="Java Source File" />
+                                        ASF.LICENSE.NOT.GRANTED--TestDelete.java &nbsp;&nbsp;&nbsp;
+                            </td>
+        </tr>
+        
+    
+
+
+
+                        <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Bugzilla Id:</b></td>
+                <td id="customfield_10010-12314205-value" class="value" bgcolor="#ffffff" width="80%">      <a href="https://issues.apache.org/bugzilla/show_bug.cgi?id=12588">https://issues.apache.org/bugzilla/show_bug.cgi?id=12588</a>
+  </td>
+            </tr>
+            </table>
+
+    <br/>
+
+    <table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+    <tr>
+        <td bgcolor="#bbbbbb" width="1%" nowrap align="center">
+            &nbsp;<font color="#ffffff"><b>Description</b></font>&nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    </table>
+
+    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+    <tr>
+        <td id="descriptionArea">
+            <p>Deleting documents from a reader has no permanent effect if the reader is <br/>
+opened before a writer is used to index new documents.  This is similar to bug <br/>
+6140 (<a href="http://nagoya.apache.org/bugzilla/show_bug.cgi?id=6140" class="external-link">http://nagoya.apache.org/bugzilla/show_bug.cgi?id=6140</a>) reported before, <br/>
+although I don&rsquo;t think it is a multi-thread issue.  The following pseudo-code <br/>
+caused the problem:</p>
+
+<p>reader.open()      </p>
+
+<p>writer.open()            <br/>
+writer.add(documentB) <br/>
+writer.close()      </p>
+
+<p>reader.delete(documentA) <br/>
+reader.close()          </p>
+
+<p>searcher.open()<br/>
+searcher.search("term_common_to_docA_and_docB") <br/>
+// This returns both docA and docB</p>
+
+<p>Please see my attached test class, which is single threaded.  I believe the <br/>
+option (a) and (b) suggested in BUG 6140 are valid, but not necessary (C).</p>
+            <br/>
+        </td>
+    </tr>
+    </table>
+
+    <br/>
+
+    <table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+    <tr>
+        <td bgcolor="#bbbbbb" width="1%" nowrap align="center">
+            &nbsp;<font color="#ffffff"><b>Comments</b></font>&nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    </table>
+
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" class="grid" style="margin: 0;">
+                <tr id="comment-header-12321129"><td bgcolor="#f0f0f0">
+            Comment by  
+                                                        <a class="user-hover" rel="tlai@leversoft.com" id="word_commented_tlai@leversoft.com" href="https://issues.apache.org/jira/secure/ViewProfile.jspa?name=tlai%40leversoft.com">Tony Lai</a>
+                                        <font size="-2">
+            [
+                <font color="#336699">13/Sep/02</font>
+
+                            ]
+            </font>
+
+        </td></tr>
+        <tr id="comment-body-12321129"><td bgcolor="#ffffff">
+            <p>Created an attachment (id=3032)<br/>
+Test class</p>
+        </td></tr>
+                <tr id="comment-header-12321130"><td bgcolor="#f0f0f0">
+            Comment by  
+                                                        <a class="user-hover" rel="tlai@leversoft.com" id="word_commented_tlai@leversoft.com" href="https://issues.apache.org/jira/secure/ViewProfile.jspa?name=tlai%40leversoft.com">Tony Lai</a>
+                                        <font size="-2">
+            [
+                <font color="#336699">13/Sep/02</font>
+
+                            ]
+            </font>
+
+        </td></tr>
+        <tr id="comment-body-12321130"><td bgcolor="#ffffff">
+            <p>Second thought.  The option (a) is not valid either.  What happen if:</p>
+
+<p>reader1.open()<br/>
+reader2.open()</p>
+
+<p>reader1.delete(documentA) <br/>
+reader2.delete(documentB) </p>
+
+<p>Document A will be restored by the second, since reader2 does not know document <br/>
+A has been deleted by reader1.  Maybe a better solution is to create an <br/>
+IndexDeleter that is a subclass of IndexReader.  It should obtain the write <br/>
+lock in the constructor as IndexWriter does, and write the delete file and <br/>
+release the write lock in the close method as IndexReader does.  </p>
+
+<p>The makeLock(String name) should also take a maximum wait time argument.  It <br/>
+should try to obtain the lock during that period of time, and return false only <br/>
+after the time is expired.  </p>
+        </td></tr>
+                <tr id="comment-header-12321131"><td bgcolor="#f0f0f0">
+            Comment by  
+                                                        <a class="user-hover" rel="otis@apache.org" id="word_commented_otis@apache.org" href="https://issues.apache.org/jira/secure/ViewProfile.jspa?name=otis%40apache.org">Otis Gospodnetic</a>
+                                        <font size="-2">
+            [
+                <font color="#336699">19/Sep/03</font>
+
+                            ]
+            </font>
+
+        </td></tr>
+        <tr id="comment-body-12321131"><td bgcolor="#ffffff">
+            <p>I believe this has been fixed last week, when one of Christoph Goller's patches<br/>
+was applied.</p>
+        </td></tr>
+            </table>
+Generated at Fri Jan 25 23:14:19 UTC 2013 using JIRA 5.2.1#813-sha1:277a5463b6482fc7983936fc2e98f8febf07503c.
+
+</body>
+</html>

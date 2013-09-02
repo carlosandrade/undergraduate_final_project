@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Cross-Sectional Poisson Analysis of Effort Estimators and Structural Complexity File Metrics (Filtered)</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: rgb(88, 72, 246)
+   }
+
+   pre .number {
+     color: rgb(0, 0, 205);
+   }
+
+   pre .comment {
+     color: rgb(76, 136, 107);
+   }
+
+   pre .keyword {
+     color: rgb(0, 0, 255);
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: rgb(3, 106, 7);
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</head>
+
+<body>
+<h1>Cross-Sectional Poisson Analysis of Effort Estimators and Structural Complexity File Metrics (Filtered)</h1>
+
+<h2>Pre-processing and Exploratory Data Analysis</h2>
+
+<p>Load Data</p>
+
+<pre><code class="r">setwd(&quot;~/Dropbox/Academia/Hawaii/Carlos_Thesis_Papers/Thesis/Chapters/scripts/data&quot;)
+derby = read.csv(&quot;derby.csv&quot;, header = TRUE)
+lucene = read.csv(&quot;lucene.csv&quot;, header = TRUE)
+pdfbox = read.csv(&quot;pdfbox.csv&quot;, header = TRUE)
+ivy = read.csv(&quot;ivy.csv&quot;, header = TRUE)
+</code></pre>
+
+<p><a href="db.apache.org/derby/">Derby</a>, <a href="lucene.apache.org/core">Lucene</a>, <a href="pdfbox.apache.org">Pdfbox</a>, <a href="ant.apache.org/ivy">Ivy</a> and <a href="mina.apache.org/ftpserver-project">Ftpserver</a> are all projects of the <a href="http://www.apache.org/">Apache Software Foundation</a>. Some data pertaining each of these projects is loaded on each variable. </p>
+
+<p>The purpose of this analysis is to observe if we can establish any relationship between structural complexity of code files and the amount of effort that was taken to maintain them. Concretly, we operationalize structural complexity as a set of <a href="http://www.spinellis.gr/sw/ckjm/doc/metric.html">OO Metrics</a>, each of which measure structural complexity. Effort is operationalized on the variables discussion, actions and churn. </p>
+
+<p>Each observation is given in a row and can be considered as follows: For every change to a <em>file</em> to address an <em>issue</em> in a given <em>release</em> we calculate structural complexity file metrics and the associated effort. Concretly, each row is identified by the columns <em>file</em>, <em>issue_code</em> and <em>release</em>. A discussion in respect of how each effort estimator is mapped to a file metric is discussed on the paper. </p>
+
+<p>Since this is a cross-sectional study, we must train and test our models in a given point in time. Since we only take measures per release, we further consider the set of datapoints that belong to each release as potential training or test sets. We must be careful however to analyze which releases can be used according to their size (some may lack enough data points to be used). </p>
+
+<pre><code class="r">suppressMessages(library(plyr))
+amountDataPointsPerRelease &lt;- function(data) {
+    ddply(data, .(release), summarise, n = length(release))
+}
+</code></pre>
+
+<p>The amount of data points per release in Derby, Lucene, Pdfbox and Ivy respectively is as follows:</p>
+
+<pre><code class="r">amountDataPointsPerRelease(derby)
+</code></pre>
+
+<pre><code>##     release   n
+## 1  10.1.1.0  97
+## 2  10.1.2.1 162
+## 3  10.1.3.1  57
+## 4  10.2.1.6  14
+## 5  10.2.2.0  10
+## 6  10.3.1.4   4
+## 7  10.3.2.1   1
+## 8  10.3.3.0   4
+## 9  10.4.2.0   7
+## 10 10.5.1.1   4
+## 11 10.5.3.0 106
+## 12 10.6.1.0  84
+## 13 10.6.2.1  30
+## 14 10.7.1.1  83
+</code></pre>
+
+<pre><code class="r">amountDataPointsPerRelease(lucene)
+</code></pre>
+
+<pre><code>##    release  n
+## 1    1.9.1  1
+## 2      2.2  1
+## 3      2.3  3
+## 4    2.3.1 20
+## 5    2.3.2  7
+## 6      2.4  3
+## 7      2.9  5
+## 8    2.9.1  2
+## 9    2.9.2 56
+## 10   2.9.3 35
+## 11   2.9.4  2
+## 12     3.0 17
+</code></pre>
+
+<pre><code class="r">amountDataPointsPerRelease(pdfbox)
+</code></pre>
+
+<pre><code>##   release  n
+## 1   1.1.0 43
+## 2   1.2.1 48
+## 3   1.3.1 23
+## 4   1.4.0 56
+## 5   1.5.0 53
+## 6   1.6.0 10
+</code></pre>
+
+<pre><code class="r">amountDataPointsPerRelease(ivy)
+</code></pre>
+
+<pre><code>##          release   n
+## 1            2.0  14
+## 2        2.0-RC1  29
+## 3        2.0-RC2  10
+## 4  2.0.0-alpha-2  18
+## 5   2.0.0-beta-1  25
+## 6   2.0.0-beta-2 190
+## 7          2.1.0  48
+## 8      2.1.0-RC1  22
+## 9      2.1.0-RC2  16
+## 10         2.2.0  25
+## 11     2.2.0-RC1  11
+</code></pre>
+
+<p>We conclude that some releases can&#39;t be used for the analysis. We decided that a threshold of at least 40 data points is a reasonable amount of data for a release to be considered either as a training or as a test set. </p>
+
+<pre><code class="r">filterReleases &lt;- function(data, threshold) {
+    # Obtain the release values that fall below the threshold for this dataset
+    data.perRelease = amountDataPointsPerRelease(data)
+    releases = data.perRelease[data.perRelease$n &gt; threshold, 1]
+    # Return datapoints that belongs only to the releases above the threshold
+    data = data[data$release %in% releases, ]
+    data
+}
+
+derby = filterReleases(derby, 40)
+lucene = filterReleases(lucene, 40)
+pdfbox = filterReleases(pdfbox, 40)
+ivy = filterReleases(ivy, 40)
+</code></pre>
+
+<p>This leave us with the following ammount of releases and associated amount of data points for each project:</p>
+
+<pre><code class="r">amountDataPointsPerRelease(derby)
+</code></pre>
+
+<pre><code>##    release   n
+## 1 10.1.1.0  97
+## 2 10.1.2.1 162
+## 3 10.1.3.1  57
+## 4 10.5.3.0 106
+## 5 10.6.1.0  84
+## 6 10.7.1.1  83
+</code></pre>
+
+<pre><code class="r">amountDataPointsPerRelease(lucene)
+</code></pre>
+
+<pre><code>##   release  n
+## 1   2.9.2 56
+</code></pre>
+
+<pre><code class="r">amountDataPointsPerRelease(pdfbox)
+</code></pre>
+
+<pre><code>##   release  n
+## 1   1.1.0 43
+## 2   1.2.1 48
+## 3   1.4.0 56
+## 4   1.5.0 53
+</code></pre>
+
+<pre><code class="r">amountDataPointsPerRelease(ivy)
+</code></pre>
+
+<pre><code>##        release   n
+## 1 2.0.0-beta-2 190
+## 2        2.1.0  48
+</code></pre>
+
+<p>For this analysis, since we measured 3 different effort estimators, we are interested in creating 3 models, one for each effort estimator and our chosen structural complexity file metrics.</p>
+
+<pre><code class="r"># Project data for the discussion effort estimator models
+derby.discussion = derby[, c(8, 9:17)]
+lucene.discussion = lucene[, c(8, 9:17)]
+pdfbox.discussion = pdfbox[, c(8, 9:17)]
+ivy.discussion = ivy[, c(8, 9:17)]
+</code></pre>
+
+<h2>Hypothesis Testing</h2>
+
+<p>For the remaining three sub sections the analysis is similar given the nature of the variables. For each effort estimator, the following hypothesis will be tested:</p>
+
+<ol>
+<li>There is a statistical significant relationship between one or more structural complexity file metrics and effort estimation <em>within</em> a release.</li>
+<li>It is possible to make predictions of the effort estimator with the structural file complexity metrics of <em>the same project</em> upcoming releases.</li>
+<li>It is possible to make predictions of the effort estimator with structural file complexity metrics of <em>different</em> project releases.</li>
+</ol>
+
+<h3>Discussion Effort Estimator Analysis</h3>
+
+<p>The first thing we must do is obtain the training and test sets fromt he filtered releases. Derby.discussion, lucene.discussion, pdfbox.discussion and ivy.discussion all contains data of all releases. Lets break them down per release:</p>
+
+<pre><code class="r"># Create a list of dataframes (tables) where each dataframe contains
+# datapoints of a given release for each project.
+derby.discussion.list = split(derby.discussion, factor(derby$release))
+lucene.discussion.list = split(lucene.discussion, factor(lucene$release))
+pdfbox.discussion.list = split(pdfbox.discussion, factor(pdfbox$release))
+ivy.discussion.list = split(ivy.discussion, factor(ivy$release))
+</code></pre>
+
+<p>Since the order of the dataframes is the order in which the releases ocurred, the first position of each project dataframe contains the first release of each project, the second position of the second project and so on. This leave us with 6 releases of derby, 1 of lucene, 4 of pdfbox and 2 of ivy. Notice that this variation is influenced also by the mapping between file and issues, along with other several threats of validity reported in the paper.
+We can observe that for the distribution of the 6 releases, only the forth (10.5.3.0.) and fifth (10.6.1.0) releases had an inflation of zero in discussions. This might affect how well a model trained in 10.1.1.0 will behave when trying to predict releases such as 4th. and 5th. We can also observe that overall most of the amount of discussion occur in a value range between 0 and 20. </p>
+
+<h3>Start of the Analysis for Release Training [[1]]</h3>
+
+<p>For starting the analysis, we need to observe which among our predictors are correlated. Correlated predictors should <em>not</em> be used.</p>
+
+<p>Since we are interested on testing the hypothesis that we can make future predictions of a release effort given the current release, we choose the first time point we have, which is the first release, to test our hypothesis. Furthermore, at this point we randomly chose one among the 6 releases of derby to be our test set. The remaining releases (2,3,4,6) shall be the cross-validation sets.</p>
+
+<pre><code class="r">derby.discussion.train = derby.discussion.list[[1]]
+head(derby.discussion.train)
+</code></pre>
+
+<pre><code>##    discussion raw_loc ckjm_dit ckjm_ca ckjm_npm ckjm_cbo ckjm_noc ckjm_rfc
+## 7          15      23        2       1        3        0        0        6
+## 41         15    1373        0      11       71       19        1      267
+## 52         15    2998        1      13      178       20        1      429
+## 53         15    2998        1      13      178       20        1      429
+## 54          7    2998        1      13      178       20        1      429
+## 70         12    1563        1      16       76       20        1      251
+##    ckjm_lcom ckjm_wmc
+## 7          0        3
+## 41       450      109
+## 52      3560      268
+## 53      3560      268
+## 54      3560      268
+## 70      2946      129
+</code></pre>
+
+<p>In our training dataset, we now observe the correlation of the variables:</p>
+
+<pre><code class="r">cor(derby.discussion.train, method = &quot;spearman&quot;)
+</code></pre>
+
+<pre><code>##            discussion  raw_loc  ckjm_dit ckjm_ca ckjm_npm ckjm_cbo
+## discussion    1.00000 0.251734  0.138554 0.01328   0.1636 -0.03983
+## raw_loc       0.25173 1.000000  0.008259 0.35417   0.5702  0.73710
+## ckjm_dit      0.13855 0.008259  1.000000 0.01973  -0.1148 -0.35746
+## ckjm_ca       0.01328 0.354173  0.019730 1.00000   0.7506  0.44710
+## ckjm_npm      0.16360 0.570169 -0.114814 0.75065   1.0000  0.62068
+## ckjm_cbo     -0.03983 0.737098 -0.357457 0.44710   0.6207  1.00000
+## ckjm_noc      0.01127 0.163896 -0.177063 0.37648   0.3714  0.20376
+## ckjm_rfc      0.22045 0.962672 -0.020208 0.44928   0.6698  0.77360
+## ckjm_lcom     0.16181 0.738295  0.066292 0.54449   0.6375  0.56876
+## ckjm_wmc      0.22742 0.850710  0.022250 0.66296   0.8238  0.67275
+##            ckjm_noc ckjm_rfc ckjm_lcom ckjm_wmc
+## discussion  0.01127  0.22045   0.16181  0.22742
+## raw_loc     0.16390  0.96267   0.73829  0.85071
+## ckjm_dit   -0.17706 -0.02021   0.06629  0.02225
+## ckjm_ca     0.37648  0.44928   0.54449  0.66296
+## ckjm_npm    0.37139  0.66981   0.63755  0.82385
+## ckjm_cbo    0.20376  0.77360   0.56876  0.67275
+## ckjm_noc    1.00000  0.20271   0.20823  0.30841
+## ckjm_rfc    0.20271  1.00000   0.73811  0.89357
+## ckjm_lcom   0.20823  0.73811   1.00000  0.82654
+## ckjm_wmc    0.30841  0.89357   0.82654  1.00000
+</code></pre>
+
+<p>From this list, by filtering among all possible combinations of predictors, aside those who are correlated we are left which the following possible predictor combination:</p>
+
+<p>Correlations (For the Combinations Python Script):</p>
+
+<p>This remains constant for all
+all = [&#39;rawloc&#39;,&#39;dit&#39;,&#39;ca&#39;,&#39;npm&#39;,&#39;cbo&#39;,&#39;noc&#39;,&#39;rfc&#39;,&#39;lcom&#39;,&#39;wmc&#39;]</p>
+
+<p>Correlation constants are given based on any ocurrence of correlation between a pair of variables whose rho &gt;= 0.7
+constraints = {&#39;rawloc&#39;:[&#39;cbo&#39;,&#39;rfc&#39;,&#39;lcom&#39;,&#39;wmc&#39;], &#39;dit&#39;:[], &#39;ca&#39;:[&#39;npm&#39;], &#39;npm&#39;:[&#39;ca&#39;,&#39;wmc&#39;],&#39;cbo&#39;:[&#39;rawloc&#39;,&#39;rfc&#39;,],&#39;noc&#39;:[],&#39;rfc&#39;:[&#39;rawloc&#39;,&#39;cbo&#39;,&#39;lcom&#39;,&#39;wmc&#39;],&#39;lcom&#39;:[&#39;rawloc&#39;,&#39;rfc&#39;,&#39;wmc&#39;],&#39;wmc&#39;:[&#39;rawloc&#39;,&#39;npm&#39;,&#39;rfc&#39;,&#39;lcom&#39;]}</p>
+
+<h2>Predictors</h2>
+
+<p>Model 1: [&#39;dit&#39;, &#39;ca&#39;, &#39;rawloc&#39;, &#39;noc&#39;]
+Model 2: [&#39;dit&#39;, &#39;npm&#39;, &#39;rawloc&#39;, &#39;noc&#39;]
+Model 3: [&#39;dit&#39;, &#39;rfc&#39;, &#39;ca&#39;, &#39;noc&#39;]
+Model 4: [&#39;dit&#39;, &#39;npm&#39;, &#39;rfc&#39;, &#39;noc&#39;]
+Model 5: [&#39;dit&#39;, &#39;ca&#39;, &#39;lcom&#39;, &#39;cbo&#39;, &#39;noc&#39;]
+Model 6: [&#39;dit&#39;, &#39;wmc&#39;, &#39;ca&#39;, &#39;cbo&#39;, &#39;noc&#39;]
+Model 7: [&#39;dit&#39;, &#39;npm&#39;, &#39;lcom&#39;, &#39;cbo&#39;, &#39;noc&#39;]</p>
+
+<p>We now observe for each of the 7 models their goodness of fit, that is, how well the poisson model given those variables fit the data. </p>
+
+<pre><code class="r">model1 &lt;- glm(discussion ~ ckjm_dit + ckjm_ca + raw_loc + ckjm_noc, data = derby.discussion.train, 
+    family = poisson)
+model2 &lt;- glm(discussion ~ ckjm_dit + ckjm_npm + raw_loc + ckjm_noc, data = derby.discussion.train, 
+    family = poisson)
+model3 &lt;- glm(discussion ~ ckjm_dit + ckjm_rfc + ckjm_ca + ckjm_noc, data = derby.discussion.train, 
+    family = poisson)
+model4 &lt;- glm(discussion ~ ckjm_dit + ckjm_npm + ckjm_rfc + ckjm_noc, data = derby.discussion.train, 
+    family = poisson)
+model5 &lt;- glm(discussion ~ ckjm_dit + ckjm_ca + ckjm_lcom + ckjm_cbo + ckjm_noc, 
+    data = derby.discussion.train, family = poisson)
+model6 &lt;- glm(discussion ~ ckjm_dit + ckjm_wmc + ckjm_ca + ckjm_cbo + ckjm_noc, 
+    data = derby.discussion.train, family = poisson)
+model7 &lt;- glm(discussion ~ ckjm_dit + ckjm_npm + ckjm_lcom + ckjm_cbo + ckjm_noc, 
+    data = derby.discussion.train, family = poisson)
+</code></pre>
+
+<p>We can see the details of each model on the following. Some of the covariates can be removed given their p &gt; 0.05.</p>
+
+<pre><code class="r">summary(model1)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## glm(formula = discussion ~ ckjm_dit + ckjm_ca + raw_loc + ckjm_noc, 
+##     family = poisson, data = derby.discussion.train)
+## 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+## -3.216  -1.295  -0.906   1.060   4.872  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  1.77e+00   5.91e-02   29.92  &lt; 2e-16 ***
+## ckjm_dit     1.64e-02   4.36e-02    0.38     0.71    
+## ckjm_ca      3.60e-03   3.11e-03    1.16     0.25    
+## raw_loc      1.67e-04   3.61e-05    4.64  3.6e-06 ***
+## ckjm_noc    -3.26e-02   2.15e-02   -1.51     0.13    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 377.90  on 96  degrees of freedom
+## Residual deviance: 349.63  on 92  degrees of freedom
+## AIC: 701.4
+## 
+## Number of Fisher Scoring iterations: 5
+</code></pre>
+
+<pre><code class="r">summary(model2)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## glm(formula = discussion ~ ckjm_dit + ckjm_npm + raw_loc + ckjm_noc, 
+##     family = poisson, data = derby.discussion.train)
+## 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+## -2.914  -1.204  -0.894   0.458   4.814  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  1.75e+00   5.87e-02   29.82  &lt; 2e-16 ***
+## ckjm_dit     2.49e-02   4.44e-02    0.56  0.57432    
+## ckjm_npm     3.68e-03   1.09e-03    3.38  0.00073 ***
+## raw_loc      9.76e-05   4.52e-05    2.16  0.03077 *  
+## ckjm_noc    -3.21e-02   2.07e-02   -1.55  0.12056    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 377.90  on 96  degrees of freedom
+## Residual deviance: 339.85  on 92  degrees of freedom
+## AIC: 691.6
+## 
+## Number of Fisher Scoring iterations: 5
+</code></pre>
+
+<pre><code class="r">summary(model3)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## glm(formula = discussion ~ ckjm_dit + ckjm_rfc + ckjm_ca + ckjm_noc, 
+##     family = poisson, data = derby.discussion.train)
+## 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+## -3.189  -1.253  -0.826   0.814   4.754  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  1.695639   0.062733   27.03  &lt; 2e-16 ***
+## ckjm_dit    -0.001297   0.043907   -0.03     0.98    
+## ckjm_rfc     0.001906   0.000318    5.99  2.1e-09 ***
+## ckjm_ca      0.000325   0.003306    0.10     0.92    
+## ckjm_noc    -0.025712   0.022172   -1.16     0.25    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 377.90  on 96  degrees of freedom
+## Residual deviance: 335.77  on 92  degrees of freedom
+## AIC: 687.5
+## 
+## Number of Fisher Scoring iterations: 5
+</code></pre>
+
+<pre><code class="r">summary(model4)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## glm(formula = discussion ~ ckjm_dit + ckjm_npm + ckjm_rfc + ckjm_noc, 
+##     family = poisson, data = derby.discussion.train)
+## 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+## -3.076  -1.312  -0.828   0.403   4.652  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  1.699445   0.062321   27.27  &lt; 2e-16 ***
+## ckjm_dit     0.007855   0.044602    0.18  0.86021    
+## ckjm_npm     0.001890   0.001285    1.47  0.14128    
+## ckjm_rfc     0.001471   0.000434    3.39  0.00069 ***
+## ckjm_noc    -0.029658   0.020574   -1.44  0.14942    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 377.90  on 96  degrees of freedom
+## Residual deviance: 333.61  on 92  degrees of freedom
+## AIC: 685.4
+## 
+## Number of Fisher Scoring iterations: 5
+</code></pre>
+
+<pre><code class="r">summary(model5)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## glm(formula = discussion ~ ckjm_dit + ckjm_ca + ckjm_lcom + ckjm_cbo + 
+##     ckjm_noc, family = poisson, data = derby.discussion.train)
+## 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+##  -3.29   -1.38   -1.02    1.14    5.03  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  1.86e+00   7.34e-02   25.38   &lt;2e-16 ***
+## ckjm_dit     1.55e-02   4.63e-02    0.34    0.737    
+## ckjm_ca      4.37e-03   3.59e-03    1.22    0.224    
+## ckjm_lcom    5.37e-05   2.27e-05    2.36    0.018 *  
+## ckjm_cbo    -2.87e-04   3.04e-03   -0.09    0.925    
+## ckjm_noc    -4.18e-02   2.21e-02   -1.89    0.058 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 377.90  on 96  degrees of freedom
+## Residual deviance: 362.75  on 91  degrees of freedom
+## AIC: 716.5
+## 
+## Number of Fisher Scoring iterations: 5
+</code></pre>
+
+<pre><code class="r">summary(model6)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## glm(formula = discussion ~ ckjm_dit + ckjm_wmc + ckjm_ca + ckjm_cbo + 
+##     ckjm_noc, family = poisson, data = derby.discussion.train)
+## 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+## -2.842  -1.310  -0.891   0.488   4.898  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  1.796151   0.073749   24.35  &lt; 2e-16 ***
+## ckjm_dit    -0.014735   0.047375   -0.31    0.756    
+## ckjm_wmc     0.003704   0.000612    6.05  1.4e-09 ***
+## ckjm_ca      0.002774   0.003688    0.75    0.452    
+## ckjm_cbo    -0.001730   0.002880   -0.60    0.548    
+## ckjm_noc    -0.042953   0.022904   -1.88    0.061 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 377.90  on 96  degrees of freedom
+## Residual deviance: 336.88  on 91  degrees of freedom
+## AIC: 690.6
+## 
+## Number of Fisher Scoring iterations: 5
+</code></pre>
+
+<p>Lets see the goodness of fitness of each of the models without removing the variables where p &gt; 0.05.</p>
+
+<pre><code class="r">with(model1, cbind(res.deviance = deviance, df = df.residual, p = pchisq(deviance, 
+    df.residual, lower.tail = FALSE)))
+</code></pre>
+
+<pre><code>##      res.deviance df         p
+## [1,]        349.6 92 1.108e-31
+</code></pre>
+
+<pre><code class="r">
+with(model2, cbind(res.deviance = deviance, df = df.residual, p = pchisq(deviance, 
+    df.residual, lower.tail = FALSE)))
+</code></pre>
+
+<pre><code>##      res.deviance df         p
+## [1,]        339.8 92 4.163e-30
+</code></pre>
+
+<pre><code class="r">
+with(model3, cbind(res.deviance = deviance, df = df.residual, p = pchisq(deviance, 
+    df.residual, lower.tail = FALSE)))
+</code></pre>
+
+<pre><code>##      res.deviance df         p
+## [1,]        335.8 92 1.865e-29
+</code></pre>
+
+<pre><code class="r">
+with(model4, cbind(res.deviance = deviance, df = df.residual, p = pchisq(deviance, 
+    df.residual, lower.tail = FALSE)))
+</code></pre>
+
+<pre><code>##      res.deviance df         p
+## [1,]        333.6 92 4.111e-29
+</code></pre>
+
+<pre><code class="r">
+with(model5, cbind(res.deviance = deviance, df = df.residual, p = pchisq(deviance, 
+    df.residual, lower.tail = FALSE)))
+</code></pre>
+
+<pre><code>##      res.deviance df         p
+## [1,]        362.8 91 4.051e-34
+</code></pre>
+
+<pre><code class="r">
+with(model6, cbind(res.deviance = deviance, df = df.residual, p = pchisq(deviance, 
+    df.residual, lower.tail = FALSE)))
+</code></pre>
+
+<pre><code>##      res.deviance df         p
+## [1,]        336.9 91 6.408e-30
+</code></pre>
+
+<p>Now lets remove the variables where p &gt; 0.05 and see their goodness of fit.</p>
+
+<pre><code class="r">model1 &lt;- glm(discussion ~ raw_loc, data = derby.discussion.train, family = poisson)
+model2 &lt;- glm(discussion ~ ckjm_npm + raw_loc, data = derby.discussion.train, 
+    family = poisson)
+model3 &lt;- glm(discussion ~ ckjm_rfc, data = derby.discussion.train, family = poisson)
+model4 &lt;- glm(discussion ~ ckjm_lcom, data = derby.discussion.train, family = poisson)
+model5 &lt;- glm(discussion ~ ckjm_wmc, data = derby.discussion.train, family = poisson)
+model6 &lt;- glm(discussion ~ ckjm_npm, data = derby.discussion.train, family = poisson)
+
+with(model1, cbind(res.deviance = deviance, df = df.residual, p = pchisq(deviance, 
+    df.residual, lower.tail = FALSE)))
+</code></pre>
+
+<pre><code>##      res.deviance df         p
+## [1,]        352.6 95 2.729e-31
+</code></pre>
+
+<pre><code class="r">
+with(model2, cbind(res.deviance = deviance, df = df.residual, p = pchisq(deviance, 
+    df.residual, lower.tail = FALSE)))
+</code></pre>
+
+<pre><code>##      res.deviance df         p
+## [1,]        343.3 94 4.444e-30
+</code></pre>
+
+<pre><code class="r">
+with(model3, cbind(res.deviance = deviance, df = df.residual, p = pchisq(deviance, 
+    df.residual, lower.tail = FALSE)))
+</code></pre>
+
+<pre><code>##      res.deviance df         p
+## [1,]        337.5 95 6.917e-29
+</code></pre>
+
+<pre><code class="r">
+with(model4, cbind(res.deviance = deviance, df = df.residual, p = pchisq(deviance, 
+    df.residual, lower.tail = FALSE)))
+</code></pre>
+
+<pre><code>##      res.deviance df         p
+## [1,]        367.3 95 1.178e-33
+</code></pre>
+
+<pre><code class="r">
+with(model5, cbind(res.deviance = deviance, df = df.residual, p = pchisq(deviance, 
+    df.residual, lower.tail = FALSE)))
+</code></pre>
+
+<pre><code>##      res.deviance df         p
+## [1,]        340.9 95 2.008e-29
+</code></pre>
+
+<pre><code class="r">
+with(model6, cbind(res.deviance = deviance, df = df.residual, p = pchisq(deviance, 
+    df.residual, lower.tail = FALSE)))
+</code></pre>
+
+<pre><code>##      res.deviance df         p
+## [1,]        349.3 95 9.433e-31
+</code></pre>
+
+<p>We can see that the goodness of fit is not good, as there is a significance value for the test.</p>
+
+<h3>Start of the Analysis for Release Training [[2]]</h3>
+
+<pre><code class="r">derby.discussion.train = derby.discussion.list[[2]]
+head(derby.discussion.train)
+</code></pre>
+
+<pre><code>##    discussion raw_loc ckjm_dit ckjm_ca ckjm_npm ckjm_cbo ckjm_noc ckjm_rfc
+## 6           4     195        1      46       23        9        1       50
+## 11         20      38        2       1        3        1        0        8
+## 12         11    1114        0       5       88       12        0      195
+## 16         20      39        2       1        3        2        0       17
+## 20          4    1178        1      26       86       22        1      232
+## 21         15    1178        1      26       86       22        1      232
+##    ckjm_lcom ckjm_wmc
+## 6        579       38
+## 11         0        3
+## 12         0      104
+## 16         0        3
+## 20      5078      136
+## 21      5078      136
+</code></pre>
+
+<p>In our training dataset, we now observe the correlation of the variables:</p>
+
+<pre><code class="r">cor(derby.discussion.train, method = &quot;spearman&quot;)
+</code></pre>
+
+<pre><code>##            discussion raw_loc ckjm_dit ckjm_ca ckjm_npm ckjm_cbo ckjm_noc
+## discussion    1.00000 0.01986 -0.10666 0.03830 -0.09992  0.01869 -0.11874
+## raw_loc       0.01986 1.00000  0.08504 0.18368  0.46049  0.56543  0.24025
+## ckjm_dit     -0.10666 0.08504  1.00000 0.18146 -0.04986 -0.23951 -0.00888
+## ckjm_ca       0.03830 0.18368  0.18146 1.00000  0.51336  0.09717  0.31572
+## ckjm_npm     -0.09992 0.46049 -0.04986 0.51336  1.00000  0.40405  0.27165
+## ckjm_cbo      0.01869 0.56543 -0.23951 0.09717  0.40405  1.00000  0.08187
+## ckjm_noc     -0.11874 0.24025 -0.00888 0.31572  0.27165  0.08187  1.00000
+## ckjm_rfc      0.03043 0.94077  0.08577 0.24243  0.56237  0.65095  0.20995
+## ckjm_lcom    -0.05556 0.66717  0.18730 0.44068  0.64131  0.41203  0.28632
+## ckjm_wmc     -0.06952 0.82697  0.16696 0.46695  0.71784  0.46865  0.32192
+##            ckjm_rfc ckjm_lcom ckjm_wmc
+## discussion  0.03043  -0.05556 -0.06952
+## raw_loc     0.94077   0.66717  0.82697
+## ckjm_dit    0.08577   0.18730  0.16696
+## ckjm_ca     0.24243   0.44068  0.46695
+## ckjm_npm    0.56237   0.64131  0.71784
+## ckjm_cbo    0.65095   0.41203  0.46865
+## ckjm_noc    0.20995   0.28632  0.32192
+## ckjm_rfc    1.00000   0.74068  0.87532
+## ckjm_lcom   0.74068   1.00000  0.83400
+## ckjm_wmc    0.87532   0.83400  1.00000
+</code></pre>
+
+<p>The correlation values are too low for any model to fit in this data.</p>
+
+<h3>Start of the Analysis for Release Training [[3]]</h3>
+
+<pre><code class="r">derby.discussion.train = derby.discussion.list[[3]]
+head(derby.discussion.train)
+</code></pre>
+
+<pre><code>##    discussion raw_loc ckjm_dit ckjm_ca ckjm_npm ckjm_cbo ckjm_noc ckjm_rfc
+## 13          5    1114        0       5       88       12        0      195
+## 22         25    1254        1      26       87       22        1      240
+## 23         25       8        1      13        5        1        0        5
+## 44          6    1352        0      11       69       19        1      264
+## 45          5    1352        0      11       69       19        1      264
+## 62         25    3003        1      13      178       20        1      430
+##    ckjm_lcom ckjm_wmc
+## 13         0      104
+## 22      5365      139
+## 23        10        5
+## 44       505      107
+## 45       505      107
+## 62      3828      269
+</code></pre>
+
+<p>In our training dataset, we now observe the correlation of the variables:</p>
+
+<pre><code class="r">cor(derby.discussion.train, method = &quot;spearman&quot;)
+</code></pre>
+
+<pre><code>##            discussion  raw_loc ckjm_dit ckjm_ca ckjm_npm ckjm_cbo ckjm_noc
+## discussion    1.00000 -0.04523 -0.02078 -0.1110  -0.2441  0.02669 -0.04646
+## raw_loc      -0.04523  1.00000 -0.01974  0.2324   0.5453  0.62586  0.39826
+## ckjm_dit     -0.02078 -0.01974  1.00000  0.1565  -0.0867 -0.26151 -0.14173
+## ckjm_ca      -0.11096  0.23238  0.15646  1.0000   0.6041  0.30042  0.28338
+## ckjm_npm     -0.24413  0.54528 -0.08670  0.6041   1.0000  0.61431  0.50258
+## ckjm_cbo      0.02669  0.62586 -0.26151  0.3004   0.6143  1.00000  0.41552
+## ckjm_noc     -0.04646  0.39826 -0.14173  0.2834   0.5026  0.41552  1.00000
+## ckjm_rfc     -0.07240  0.95294 -0.10062  0.2729   0.6613  0.73537  0.45960
+## ckjm_lcom    -0.02056  0.74187  0.09503  0.5197   0.7136  0.66605  0.56895
+## ckjm_wmc     -0.15133  0.82289  0.02220  0.5022   0.8122  0.68525  0.51993
+##            ckjm_rfc ckjm_lcom ckjm_wmc
+## discussion  -0.0724  -0.02056  -0.1513
+## raw_loc      0.9529   0.74187   0.8229
+## ckjm_dit    -0.1006   0.09503   0.0222
+## ckjm_ca      0.2729   0.51974   0.5022
+## ckjm_npm     0.6613   0.71359   0.8122
+## ckjm_cbo     0.7354   0.66605   0.6853
+## ckjm_noc     0.4596   0.56895   0.5199
+## ckjm_rfc     1.0000   0.78751   0.8848
+## ckjm_lcom    0.7875   1.00000   0.8974
+## ckjm_wmc     0.8848   0.89737   1.0000
+</code></pre>
+
+<p>The correlation values are too low for any model to fit in this data.</p>
+
+<h3>Start of the Analysis for Release Training [[4]]</h3>
+
+<pre><code class="r">derby.discussion.train = derby.discussion.list[[4]]
+head(derby.discussion.train)
+</code></pre>
+
+<pre><code>##    discussion raw_loc ckjm_dit ckjm_ca ckjm_npm ckjm_cbo ckjm_noc ckjm_rfc
+## 1          14     128        0       0        5        2        0       39
+## 3           0     342        2       2        6        7        0       84
+## 14         35    1083        0      11       86       12        1      182
+## 17         18     737        1      23       28        4        1       55
+## 24         35    1085        1       4        1        9        0      178
+## 27         18    1003        1      14       35       18        1      192
+##    ckjm_lcom ckjm_wmc
+## 1          3       10
+## 3        434       34
+## 14         0      101
+## 17       476       40
+## 24       950       88
+## 27      1571       86
+</code></pre>
+
+<p>In our training dataset, we now observe the correlation of the variables:</p>
+
+<pre><code class="r">cor(derby.discussion.train, method = &quot;spearman&quot;)
+</code></pre>
+
+<pre><code>##            discussion raw_loc ckjm_dit ckjm_ca ckjm_npm ckjm_cbo ckjm_noc
+## discussion    1.00000 0.27146  0.16413 0.07099 -0.01229  -0.1643   0.1435
+## raw_loc       0.27146 1.00000  0.01517 0.43832  0.57662   0.7342   0.2485
+## ckjm_dit      0.16413 0.01517  1.00000 0.04713 -0.07259  -0.3025  -0.1380
+## ckjm_ca       0.07099 0.43832  0.04713 1.00000  0.60321   0.3888   0.2887
+## ckjm_npm     -0.01229 0.57662 -0.07259 0.60321  1.00000   0.5736   0.3737
+## ckjm_cbo     -0.16431 0.73423 -0.30255 0.38881  0.57356   1.0000   0.2705
+## ckjm_noc      0.14345 0.24846 -0.13798 0.28871  0.37368   0.2705   1.0000
+## ckjm_rfc      0.14180 0.91205 -0.11171 0.49527  0.68738   0.8633   0.3194
+## ckjm_lcom     0.15577 0.61233  0.10856 0.44214  0.59974   0.4926   0.2050
+## ckjm_wmc      0.24105 0.86444  0.07275 0.58261  0.76481   0.6727   0.3760
+##            ckjm_rfc ckjm_lcom ckjm_wmc
+## discussion   0.1418    0.1558  0.24105
+## raw_loc      0.9120    0.6123  0.86444
+## ckjm_dit    -0.1117    0.1086  0.07275
+## ckjm_ca      0.4953    0.4421  0.58261
+## ckjm_npm     0.6874    0.5997  0.76481
+## ckjm_cbo     0.8633    0.4926  0.67273
+## ckjm_noc     0.3194    0.2050  0.37597
+## ckjm_rfc     1.0000    0.6457  0.91616
+## ckjm_lcom    0.6457    1.0000  0.71794
+## ckjm_wmc     0.9162    0.7179  1.00000
+</code></pre>
+
+<p>The correlation values are too low for any model to fit in this data.</p>
+
+<h3>Start of the Analysis for Release Training [[6]]</h3>
+
+<pre><code class="r">derby.discussion.train = derby.discussion.list[[6]]
+head(derby.discussion.train)
+</code></pre>
+
+<pre><code>##    discussion raw_loc ckjm_dit ckjm_ca ckjm_npm ckjm_cbo ckjm_noc ckjm_rfc
+## 2           3     324        0       0        6        2        0       85
+## 19          0     765        1      23       28        4        1       55
+## 25          5    1175        1       4        1        9        0      188
+## 30          3    1077        1      14       35       18        1      207
+## 35          0     395        1       3       13        5        0       53
+## 51          9    2206        1      16       77       31        2      317
+##    ckjm_lcom ckjm_wmc
+## 2        179       22
+## 19       476       40
+## 25      1217       91
+## 30      1586       88
+## 35       120       16
+## 51      1450      133
+</code></pre>
+
+<p>In our training dataset, we now observe the correlation of the variables:</p>
+
+<pre><code class="r">cor(derby.discussion.train, method = &quot;spearman&quot;)
+</code></pre>
+
+<pre><code>##            discussion  raw_loc ckjm_dit ckjm_ca ckjm_npm ckjm_cbo
+## discussion   1.000000 -0.16895  0.02266 -0.1402  -0.1861  0.05077
+## raw_loc     -0.168949  1.00000  0.02788  0.4011   0.5533  0.72140
+## ckjm_dit     0.022664  0.02788  1.00000  0.4000   0.1384 -0.03303
+## ckjm_ca     -0.140239  0.40114  0.40002  1.0000   0.5614  0.25725
+## ckjm_npm    -0.186105  0.55332  0.13842  0.5614   1.0000  0.52626
+## ckjm_cbo     0.050771  0.72140 -0.03303  0.2572   0.5263  1.00000
+## ckjm_noc    -0.000484  0.37671 -0.09934  0.3434   0.4490  0.29756
+## ckjm_rfc    -0.101221  0.90899  0.03722  0.4337   0.6342  0.85060
+## ckjm_lcom   -0.182146  0.77201  0.14412  0.5649   0.7549  0.62148
+## ckjm_wmc    -0.188429  0.85202  0.11542  0.5749   0.7626  0.70321
+##             ckjm_noc ckjm_rfc ckjm_lcom ckjm_wmc
+## discussion -0.000484 -0.10122   -0.1821  -0.1884
+## raw_loc     0.376709  0.90899    0.7720   0.8520
+## ckjm_dit   -0.099336  0.03722    0.1441   0.1154
+## ckjm_ca     0.343392  0.43370    0.5649   0.5749
+## ckjm_npm    0.448975  0.63417    0.7549   0.7626
+## ckjm_cbo    0.297563  0.85060    0.6215   0.7032
+## ckjm_noc    1.000000  0.40666    0.4777   0.4802
+## ckjm_rfc    0.406661  1.00000    0.8337   0.9237
+## ckjm_lcom   0.477679  0.83373    1.0000   0.9452
+## ckjm_wmc    0.480157  0.92369    0.9452   1.0000
+</code></pre>
+
+<p>The correlation values are too low for any model to fit in this data.</p>
+
+</body>
+
+</html>
+

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>[#LUCENE-58] Date fields should not be tokenized.</title>
+    <meta http-equiv="Content-Type" Content="application/vnd.ms-word; charset=utf-8">
+        <style type="text/css">
+
+.tableBorder, .grid
+{
+    background-color: #fff;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableBorder td, .grid td
+{
+    vertical-align: top;
+    padding: 2px;
+    border: 1px solid #ccc;
+}
+
+.noPadding
+{
+    padding: 0 !important;
+}
+
+h3 .subText
+{
+    font-size: 60%;
+    font-weight: normal;
+}
+
+.tabLabel
+{
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-bottom:none;
+    padding: 2px;
+    display: inline;
+}
+
+td.blank
+{
+    padding: 0;
+    margin: 0;
+}
+
+.blank td
+{
+    border: none;
+}
+
+#descriptionArea
+{
+    margin: 0;
+    padding: 2px;
+    border: 1px solid #ccc;
+}
+
+hr
+{
+    border-top:1px solid #aaa;
+}
+
+hr.fullcontent
+{
+  height: 15px;
+  padding: 10px 0;
+  background: #fff url('https://issues.apache.org/jira/images/icons/hr.gif') no-repeat scroll center;
+}
+
+</style>
+
+</head>
+<body>
+
+<table class="tableBorder" cellpadding="0" cellspacing="0" border="0" width="100%">
+    <tr>
+        <td bgcolor="#f0f0f0" width="100%" colspan="2" valign="top">
+                            <h3 class="formtitle">
+                        [LUCENE-58]&nbsp;<a href="https://issues.apache.org/jira/browse/LUCENE-58">Date fields should not be tokenized.</a>
+            <span class="subText">
+               Created: 17/Sep/02                   &nbsp;Updated: 02/Jun/11
+
+                                                    &nbsp;Resolved: 27/May/06
+                            </span>
+            </h3>
+        </td>
+    </tr>
+    <tr>
+        <td width="20%"><b>Status:</b></td>
+        <td width="80%">Closed</td>
+    </tr>
+    <tr>
+        <td width="20%"><b>Project:</b></td>
+        <td width="80%"><a href="https://issues.apache.org/jira/secure/BrowseProject.jspa?id=12310110">Lucene - Core</a></td>
+    </tr>
+
+        <tr>
+            <td><b>Component/s:</b></td>
+            <td>
+                                        <a title="core/index - issues with indexing code"
+                href="https://issues.apache.org/jira/secure/IssueNavigator.jspa?reset=true&mode=hide&sorter/order=ASC&sorter/field=priority&pid=12310110&component=12310232"
+            >core/index</a>                        </td>
+    </tr>
+    
+
+        <tr>
+            <td><b>Affects Version/s:</b></td>
+            <td>
+                            None
+                </td>
+    </tr>
+    
+
+        <tr>
+            <td><b>Fix Version/s:</b></td>
+            <td>
+                            None
+                </td>
+    </tr>
+    
+    </table>
+
+<br />
+<table class="grid" cellpadding="0" cellspacing="0" border="0" width="100%">
+    <tr>
+        <td bgcolor="#f0f0f0" valign="top" width="20%">
+            <b>Type:</b>
+        </td>
+        <td bgcolor="#ffffff" valign="top"  width="30%" >
+            Bug
+        </td>
+
+                    <td bgcolor="#f0f0f0">
+                <b>Priority:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top" nowrap>
+                Major
+            </td>
+            </tr>
+    <tr>
+                        <td bgcolor="#f0f0f0" valign="top" width="20%">
+                <b>Reporter:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top"  width="30%" >
+                                            <a class="user-hover" rel="hc56@cornell.edu" id="word_reporter_hc56@cornell.edu" href="https://issues.apache.org/jira/secure/ViewProfile.jspa?name=hc56%40cornell.edu">Herman Chen</a>
+                            </td>
+        
+                    <td bgcolor="#f0f0f0" width="20%">
+                <b>Assignee:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top" nowrap  width="30%" >
+                                            <a class="user-hover" rel="java-dev@lucene.apache.org" id="word_assignee_java-dev@lucene.apache.org" href="https://issues.apache.org/jira/secure/ViewProfile.jspa?name=java-dev%40lucene.apache.org">Lucene Developers</a>
+                            </td>
+            </tr>
+    	<tr>
+		<td bgcolor="#f0f0f0" width="20%">
+			<b>Resolution:</b>
+		</td>
+		<td bgcolor="#ffffff" valign="top" width="30%" nowrap>
+                            Fixed
+                    </td>
+                    <td bgcolor="#f0f0f0" width="20%">
+                <b>Votes:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top" width="30%" nowrap>
+                0
+            </td>
+        
+    </tr>
+    
+        <tr>
+        <td bgcolor="#f0f0f0" width="20%">
+            <b>Labels:</b>
+        </td>
+        <td id="labels-12314208-value" class="value" bgcolor="#ffffff" valign="top" colspan="3" nowrap>
+                            None
+                    </td>
+    </tr>
+    
+    	<tr>
+        		<td bgcolor="#f0f0f0" width="20%"><b>Remaining Estimate:</b></td>
+        <td bgcolor="#ffffff" valign="top" nowrap width="80%" colspan="3">
+                            Not Specified
+            		</td>
+    </tr>
+    <tr>
+                <td bgcolor="#f0f0f0" width="20%"><b>Time Spent:</b></td>
+		<td bgcolor="#ffffff" valign="top" nowrap width="80%" colspan="3">
+                            Not Specified
+            		</td>
+	</tr>
+    <tr>
+                <td bgcolor="#f0f0f0" width="20%"><b>Original Estimate:</b></td>
+		<td bgcolor="#ffffff" valign="top" nowrap width="80%" colspan="3">
+                            Not Specified
+            		</td>
+    </tr>
+    
+    	<tr>
+
+		<td bgcolor="#f0f0f0" width="20%" valign="top">
+			<b>Environment:</b>
+		</td>
+		<td bgcolor="#ffffff" valign="top" colspan="3">
+            <p>Operating System: All<br/>
+Platform: All</p>
+		</td>
+	</tr>
+    </table>
+
+
+
+    <br />
+
+    	<table class="grid" cellpadding="0" cellspacing="0" border="0" width="100%">
+            
+
+        
+    
+
+
+
+                        <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Bugzilla Id:</b></td>
+                <td id="customfield_10010-12314208-value" class="value" bgcolor="#ffffff" width="80%">      <a href="https://issues.apache.org/bugzilla/show_bug.cgi?id=12723">https://issues.apache.org/bugzilla/show_bug.cgi?id=12723</a>
+  </td>
+            </tr>
+            </table>
+
+    <br/>
+
+    <table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+    <tr>
+        <td bgcolor="#bbbbbb" width="1%" nowrap align="center">
+            &nbsp;<font color="#ffffff"><b>Description</b></font>&nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    </table>
+
+    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+    <tr>
+        <td id="descriptionArea">
+            <p>the helper factory method in org.apache.lucene.document.Field :<br/>
+public static final Field Keyword(String name, Date value)<br/>
+specifies the field to be tokenized, which I don't think is correct...</p>
+
+<p>the TestDateFilter testcase manually creates the field so the bug is not<br/>
+caught by testcases</p>
+            <br/>
+        </td>
+    </tr>
+    </table>
+
+    <br/>
+
+    <table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+    <tr>
+        <td bgcolor="#bbbbbb" width="1%" nowrap align="center">
+            &nbsp;<font color="#ffffff"><b>Comments</b></font>&nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    </table>
+
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" class="grid" style="margin: 0;">
+                <tr id="comment-header-12321137"><td bgcolor="#f0f0f0">
+            Comment by  
+                                                        <a class="user-hover" rel="jakarta@ehatchersolutions.com" id="word_commented_jakarta@ehatchersolutions.com" href="https://issues.apache.org/jira/secure/ViewProfile.jspa?name=jakarta%40ehatchersolutions.com">Erik Hatcher</a>
+                                        <font size="-2">
+            [
+                <font color="#336699">17/Dec/02</font>
+
+                            ]
+            </font>
+
+        </td></tr>
+        <tr id="comment-body-12321137"><td bgcolor="#ffffff">
+            <ul>
+	<li>
+	<ul>
+		<li>
+		<ul>
+			<li>Bug 14585 has been marked as a duplicate of this bug. ***</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+        </td></tr>
+                <tr id="comment-header-12321138"><td bgcolor="#f0f0f0">
+            Comment by  
+                                                        <a class="user-hover" rel="otis@apache.org" id="word_commented_otis@apache.org" href="https://issues.apache.org/jira/secure/ViewProfile.jspa?name=otis%40apache.org">Otis Gospodnetic</a>
+                                        <font size="-2">
+            [
+                <font color="#336699">05/Jan/03</font>
+
+                            ]
+            </font>
+
+        </td></tr>
+        <tr id="comment-body-12321138"><td bgcolor="#ffffff">
+            <p>Yes, dates should not be tokenized.  This problem became visible when<br/>
+DateField's timeToString method started prepending spaces instead of zeros to<br/>
+the date string.  This has been fixed now, and this tokenizing of Date fields in<br/>
+Field class has been turned off.<br/>
+Date fields should now be Strings containing no spaces, so this problem should<br/>
+not come up.</p>
+        </td></tr>
+            </table>
+Generated at Fri Jan 25 23:14:41 UTC 2013 using JIRA 5.2.1#813-sha1:277a5463b6482fc7983936fc2e98f8febf07503c.
+
+</body>
+</html>
